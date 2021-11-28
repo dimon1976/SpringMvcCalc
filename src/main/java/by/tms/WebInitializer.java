@@ -1,4 +1,4 @@
-package by.tms.storage;
+package by.tms;
 
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
