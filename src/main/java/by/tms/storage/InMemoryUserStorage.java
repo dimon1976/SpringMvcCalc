@@ -4,11 +4,10 @@ import by.tms.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class InMemoryUserStorage {
-    private final List<User> users = new ArrayList<>();
+    private final ArrayList<User> users = new ArrayList<>();
     private long incId = 0;
 
 
@@ -57,7 +56,7 @@ public class InMemoryUserStorage {
         }
     }
 
-    public List<User> getUsers() {
+    public ArrayList<User> getUsers() {
         return users;
     }
 }

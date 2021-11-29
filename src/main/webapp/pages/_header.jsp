@@ -29,7 +29,7 @@
                     <a class="nav-link" href="/user/delete">Delete user</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/calc">Calc</a>
+                    <a class="nav-link" href="/calculator">Calc</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/user/logout">Logout</a>

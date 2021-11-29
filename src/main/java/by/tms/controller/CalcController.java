@@ -1,9 +1,9 @@
 package by.tms.controller;
 
-import by.tms.entity.History;
 import by.tms.entity.User;
 import by.tms.service.CalcService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,22 +12,22 @@ import javax.servlet.http.HttpSession;
 import java.util.LinkedList;
 
 @Controller
-@RequestMapping("/calc")
+@RequestMapping("/")
 public class CalcController {
     CalcService service = new CalcService();
 
-    @GetMapping
+    @GetMapping("/calculator")
     public String calc() {
         return "calc";
     }
 
-    @PostMapping("/")
-    public String calc(double num1, double num2, String operation, HttpSession httpSession) {
+    @PostMapping("/calculator")
+    public String calc(double num1, double num2, String operation, HttpSession httpSession, Model model) {
         User user = (User) httpSession.getAttribute("user");
         Double result = service.start(num1, num2, operation, user);
-        LinkedList<History> results = service.select(user.getId());
-        httpSession.setAttribute("results", results);
-        httpSession.setAttribute("message", result);
+        LinkedList<Double> results = service.select(user.getId());
+        model.addAttribute("results", results);
+        model.addAttribute("message", result);
         return "calc";
     }
 }

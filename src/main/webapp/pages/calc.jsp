@@ -16,7 +16,7 @@
 <div class="container">
     <div class="row justify-content-center m-5">
         <div class="col-sm-9">
-            <form class="row gx-3 gy-2 align-items-center" action="${pageContext.request.contextPath}/calc/calc"
+            <form class="row gx-3 gy-2 align-items-center" action="${pageContext.request.contextPath}/calculator"
                   method="post">
                 <div class="col-sm-3">
                     <label class="visually-hidden" for="specificSizeInputName">Number</label>
@@ -41,17 +41,17 @@
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary">=</button>
                 </div>
-                <c:if test="${requestScope.message!=null}">
+                <c:if test="${message!=null}">
                     <div class="col-sm-3 justify-content-center">
                         <div class="alert alert-dark" role="alert">
-                                ${requestScope.message}
+                                ${message}
                         </div>
                     </div>
                 </c:if>
-                <c:if test="${requestScope.results!=null}">
+                <c:if test="${results!=null}">
                     <fieldset>
                         <legend>История операций</legend>
-                        <c:forEach var="results" items="${requestScope.results}">
+                        <c:forEach var="results" items="${results}">
                             <ol class="list-group list-group-numbered">
                                 <li class="list-group-item mt-1">${results.num1} ${results.operation} ${results.num2}
                                     = ${results.result}</li>

@@ -13,9 +13,9 @@
 </head>
 <body>
 <jsp:include page="_header.jsp"/>
-<c:if test="${requestScope.message!=null}">
+<c:if test="${message!=null}">
     <div class="alert alert-danger" role="alert">
-            ${requestScope.message}
+            ${message}
     </div>
 </c:if>
 </body>

@@ -1,6 +1,5 @@
 package by.tms.controller;
 
-import by.tms.entity.History;
 import by.tms.entity.User;
 import by.tms.service.CalcService;
 import by.tms.service.UserService;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,8 +30,10 @@ public class UserController {
         User byUsername = userService.findByUsername(username);
         if (byUsername != null) {
             if (byUsername.getPassword().equals(password)) {
+                ArrayList<User> users = userService.findAllUsers();
                 httpSession.setAttribute("user", byUsername);
-                return "redirect:/";
+                model.addAttribute("userList", users);
+                return "home";
             } else {
                 model.addAttribute("message", "Wrong password!");
             }
@@ -56,7 +58,7 @@ public class UserController {
                         model.addAttribute("message", "This login exists");
                     } else {
                         model.addAttribute("message", "Are you registered. Please log in.");
-                        return "redirect:/user/authorization";
+                        return "authorization";
                     }
                 } else {
                     model.addAttribute("message", "password is NULL");
@@ -77,12 +79,12 @@ public class UserController {
     }
 
     @PostMapping("/edit")
-    public String edit(String name, String username, String password, HttpSession httpSession) {
+    public String edit(String name, String username, String password, HttpSession httpSession, Model model) {
         User user = (User) httpSession.getAttribute("user");
         User newUser = userService.editUser(user, name, username, password);
-        httpSession.setAttribute("user", newUser);
-        httpSession.setAttribute("message", "User updated");
-        return "/";
+        model.addAttribute("user", newUser);
+        model.addAttribute("message", "User updated");
+        return "home";
     }
 
     @GetMapping("/delete")
@@ -104,15 +106,15 @@ public class UserController {
     }
 
     @PostMapping("/adminmenu")
-    public String adminMenu(String operation, long userId, HttpSession httpSession) {
+    public String adminMenu(String operation, long userId, Model model) {
         userService.useAdminMenu(operation, userId);
         List<User> users = userService.findAllUsers();
-        LinkedList<History> results = calcService.select(userId);
-        httpSession.setAttribute("results", results);
-        httpSession.setAttribute("users", users);
-        httpSession.setAttribute("userid", userId);
-        httpSession.setAttribute("operation", operation);
-        return "adminMenu";
+        LinkedList<Double> results = calcService.select(userId);
+        model.addAttribute("results", results);
+        model.addAttribute("users", users);
+        model.addAttribute("userid", userId);
+        model.addAttribute("operation", operation);
+        return "adminmenu";
     }
 
     @GetMapping("/logout")

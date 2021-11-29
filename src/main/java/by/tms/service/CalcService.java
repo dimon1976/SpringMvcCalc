@@ -33,8 +33,8 @@ public class CalcService {
         return null;
     }
 
-    public LinkedList<History> select(long userid) {
-        return history.returnHistoryOfOperation(userid);
+    public LinkedList<Double> select(long userid) {
+        return history.getHistoryOperation();
     }
 
 }

@@ -20,16 +20,15 @@
             <fieldset>
                 <legend>Зарегистрированные пользователи</legend>
                 <ol class="list-group list-group-flush">
-                    <c:forEach var="users" items="${sessionScope.users}">
-                        <c:if test="${sessionScope.user.id!=users.id}">
-
+                    <c:forEach var="user" items="${users}">
+                        <c:if test="${sessionScope.user.id!=user.id}">
                             <li class="list-group-item">
-                                <form action="/user/adminmenu" method="post">
+                                <form action="${pageContext.request.contextPath}/user/adminmenu" method="post">
                                     <p><label>
-                                        <input type="text" name="userId" hidden value="${users.id}">
-                                    </label> ${users.name}
-                                        <c:if test="${users.admin==1}"> - администратор</c:if>
-                                        <c:if test="${users.admin==0}"> - пользователь</c:if>
+                                        <input type="text" name="userId" hidden value="${user.id}">
+                                    </label> ${user.name}
+                                        <c:if test="${user.admin==1}"> - администратор</c:if>
+                                        <c:if test="${user.admin==0}"> - пользователь</c:if>
                                         <button type="submit" name="operation" class="btn btn-danger" value="del">
                                             Удалить
                                         </button>
@@ -44,9 +43,9 @@
                                             операций
                                         </button>
                                     </p>
-                                    <c:if test="${requestScope.operation.equals('history_operation')}">
-                                        <c:if test="${requestScope.userid==users.id}">
-                                            <c:forEach var="results" items="${requestScope.results}">
+                                    <c:if test="${operation.equals('history_operation')}">
+                                        <c:if test="${userid==user.id}">
+                                            <c:forEach var="results" items="${results}">
                                                 <ul class="list-group">
                                                     <li class="list-group-item">${results.num1} ${results.operation} ${results.num2}
                                                         = ${results.result}</li>
