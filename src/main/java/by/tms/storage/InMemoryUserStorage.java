@@ -4,6 +4,7 @@ import by.tms.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 @Component
 public class InMemoryUserStorage {
@@ -58,5 +59,14 @@ public class InMemoryUserStorage {
 
     public ArrayList<User> getUsers() {
         return users;
+    }
+
+    public void save(double result, User user) {
+        if (user.getResultList() != null) {
+            user.getResultList().addFirst(result);
+            return;
+        }
+        user.setResultList(new LinkedList<Double>());
+        user.getResultList().addFirst(result);
     }
 }

@@ -24,7 +24,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail2" class="form-label">Login</label>
-                    <input type="text" name="username" class="form-control" id="exampleInputEmail2"
+                    <input type="text" name="userName" class="form-control" id="exampleInputEmail2"
                            aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">

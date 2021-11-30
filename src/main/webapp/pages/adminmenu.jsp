@@ -20,7 +20,7 @@
             <fieldset>
                 <legend>Зарегистрированные пользователи</legend>
                 <ol class="list-group list-group-flush">
-                    <c:forEach var="user" items="${users}">
+                    <c:forEach var="user" items="${sessionScope.users}">
                         <c:if test="${sessionScope.user.id!=user.id}">
                             <li class="list-group-item">
                                 <form action="${pageContext.request.contextPath}/user/adminmenu" method="post">
@@ -43,7 +43,7 @@
                                             операций
                                         </button>
                                     </p>
-                                    <c:if test="${operation.equals('history_operation')}">
+                                    <c:if test="${requestScope.operation.equals('history_operation')}">
                                         <c:if test="${userid==user.id}">
                                             <c:forEach var="results" items="${results}">
                                                 <ul class="list-group">

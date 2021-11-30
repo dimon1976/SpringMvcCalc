@@ -7,7 +7,7 @@
         <nav class="navbar navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand" href="<c:url value="/"/>">
-                        <img src="images/62837181.jpg" alt="" width="30" height="24">
+                        <img src="images/62837181.jpg" alt="My Calc" width="30" height="24">
                 </a>
             </div>
         </nav>

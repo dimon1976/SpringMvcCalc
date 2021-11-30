@@ -1,9 +1,13 @@
 package by.tms.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.LinkedList;
+
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class User {
     private long id;
@@ -11,42 +15,39 @@ public class User {
     private String userName;
     private String password;
     private int admin;
+    private LinkedList<Double> resultList;
 
-    public User(long id, String name, String login, String pass) {
-        this.id = id;
-        this.name = name;
-        this.userName = login;
-        this.password = pass;
-    }
-
-    public User(String name, String login, String pass) {
-        this.name = name;
-        this.userName = login;
-        this.password = pass;
-    }
-
-    public User(long id, String name, String login, String pass, int admin) {
-        this.id = id;
-        this.name = name;
-        this.userName = login;
-        this.password = pass;
-        this.admin = admin;
-    }
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getUserName() {
         return userName;
     }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getAdmin() {
@@ -57,8 +58,11 @@ public class User {
         this.admin = admin;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public LinkedList<Double> getResultList() {
+        return resultList;
     }
 
+    public void setResultList(LinkedList<Double> resultList) {
+        this.resultList = resultList;
+    }
 }

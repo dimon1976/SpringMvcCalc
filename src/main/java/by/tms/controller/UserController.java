@@ -30,9 +30,9 @@ public class UserController {
         User byUsername = userService.findByUsername(username);
         if (byUsername != null) {
             if (byUsername.getPassword().equals(password)) {
-                ArrayList<User> users = userService.findAllUsers();
+                ArrayList<User> userList = userService.findAllUsers();
                 httpSession.setAttribute("user", byUsername);
-                model.addAttribute("userList", users);
+                httpSession.setAttribute("users", userList);
                 return "home";
             } else {
                 model.addAttribute("message", "Wrong password!");
@@ -50,11 +50,11 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String reg(String name, String username, String password, Model model) {
-        if (!name.isEmpty()) {
-            if (!username.isEmpty()) {
-                if (!password.isEmpty()) {
-                    if (!userService.register(new User(name, username, password))) {
+    public String reg(User user, Model model) {
+        if (!user.getName().isEmpty()) {
+            if (!user.getUserName().isEmpty()) {
+                if (!user.getPassword().isEmpty()) {
+                    if (!userService.register(user)) {
                         model.addAttribute("message", "This login exists");
                     } else {
                         model.addAttribute("message", "Are you registered. Please log in.");
@@ -106,12 +106,13 @@ public class UserController {
     }
 
     @PostMapping("/adminmenu")
-    public String adminMenu(String operation, long userId, Model model) {
+    public String adminMenu(String operation, long userId, Model model,HttpSession httpSession) {
         userService.useAdminMenu(operation, userId);
-        List<User> users = userService.findAllUsers();
-        LinkedList<Double> results = calcService.select(userId);
+        User user = (User) httpSession.getAttribute("user");
+        List<User> userList = userService.findAllUsers();
+        LinkedList<Double> results = calcService.select(user);
         model.addAttribute("results", results);
-        model.addAttribute("users", users);
+        model.addAttribute("users", userList);
         model.addAttribute("userid", userId);
         model.addAttribute("operation", operation);
         return "adminmenu";

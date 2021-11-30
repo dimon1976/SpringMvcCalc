@@ -24,8 +24,8 @@ public class CalcController {
     @PostMapping("/calculator")
     public String calc(double num1, double num2, String operation, HttpSession httpSession, Model model) {
         User user = (User) httpSession.getAttribute("user");
-        Double result = service.start(num1, num2, operation, user);
-        LinkedList<Double> results = service.select(user.getId());
+        Double result = service.getOperation(num1, num2, operation, user);
+        LinkedList<Double> results = service.select(user);
         model.addAttribute("results", results);
         model.addAttribute("message", result);
         return "calc";

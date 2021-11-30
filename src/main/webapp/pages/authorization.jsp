@@ -28,7 +28,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            <c:if test="${message}">
+            <c:if test="${message!=null}">
                 <div class="alert alert-danger" role="alert">
                         ${message}
                 </div>
